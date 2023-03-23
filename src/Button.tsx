@@ -1,7 +1,14 @@
-import React from 'react'
+// import React from 'react'
+import styled from './Button.module.css'
 
-function Button() {
-  return <button>test</button>
+type ButtonProps = {
+  text: string
+  cls?: string
+  mark?: string
+}
+
+function Button({ text, cls }: ButtonProps) {
+  return <button className={styled.btn}>{text}</button>
 }
 
 export default Button
