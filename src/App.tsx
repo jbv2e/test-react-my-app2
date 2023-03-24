@@ -7,28 +7,20 @@ import Button from './Button'
 import styles from './App.module.css'
 
 function App() {
-  const [counter, setCounter] = useState(0)
-  const [keyword, setKeyword] = useState('')
-  function onChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setKeyword(event.target.value)
+  const [showing, setShowing] = useState(false)
+  const onClick = () => {
+    setShowing((cur) => !cur)
   }
-  function onClick() {
-    setCounter((cur) => cur + 1)
+  function Hello() {
+    useEffect(() => {
+      console.log('Hello')
+    }, [])
+    return <h1>Hello</h1>
   }
-  console.log('render')
-  function isRunOnlyOnce() {
-    console.log('once')
-  }
-  useEffect(isRunOnlyOnce, [])
-  useEffect(() => {
-    if (keyword !== '') console.log('Search For', keyword)
-  }, [keyword])
   return (
     <div>
-      <input onChange={onChange} type='text' placeholder='Search'></input>
-      <h1 className={styles.title}>1test {counter}</h1>
-      <button onClick={onClick}>{counter}</button>
-      {/* <Button text='test2' cls='btn' /> */}
+      {showing ? <Hello /> : null}
+      <button onClick={onClick}>{showing ? 'Hide' : 'Show'}</button>
     </div>
   )
 }
