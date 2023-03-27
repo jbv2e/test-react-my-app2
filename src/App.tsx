@@ -7,27 +7,25 @@ import Button from './Button'
 import styles from './App.module.css'
 
 function App() {
-  const [showing, setShowing] = useState(false)
-  const onClick = () => {
-    setShowing((cur) => !cur)
-  }
-  function Hello() {
-    // console.log('Hello')
-    function effectFn() {
-      console.log('hello')
-      return destroy
-    }
-    function destroy() {
-      console.log('bye')
-    }
+  const [toDo, setToDo] = useState<string>('')
+  const [toDoArray, setToDoArray] = useState<string[]>([])
 
-    useEffect(effectFn, [])
-    return <h1>Hello</h1>
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setToDo(e.target.value)
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (toDo === '') return
+    setToDoArray((cur) => [toDo, ...cur])
+    setToDo('')
+    console.log(toDoArray)
   }
   return (
     <div>
-      {showing ? <Hello /> : null}
-      <button onClick={onClick}>{showing ? 'Hide' : 'Show'}</button>
+      <h1>Todo ({toDoArray.length})</h1>
+      <form onSubmit={onSubmit}>
+        <input value={toDo} onChange={onChange} type='text' placeholder='Write your to do'></input>
+
+        <button>Add To do</button>
+      </form>
     </div>
   )
 }
