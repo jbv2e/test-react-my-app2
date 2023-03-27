@@ -12,9 +12,16 @@ function App() {
     setShowing((cur) => !cur)
   }
   function Hello() {
-    useEffect(() => {
-      console.log('Hello')
-    }, [])
+    // console.log('Hello')
+    function effectFn() {
+      console.log('hello')
+      return destroy
+    }
+    function destroy() {
+      console.log('bye')
+    }
+
+    useEffect(effectFn, [])
     return <h1>Hello</h1>
   }
   return (
