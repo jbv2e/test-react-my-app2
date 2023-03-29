@@ -16,7 +16,7 @@ function App() {
     if (toDo === '') return
     setToDoArray((cur) => [toDo, ...cur])
     setToDo('')
-    console.log(toDoArray)
+    //console.log(toDoArray)
   }
   return (
     <div>
@@ -25,6 +25,10 @@ function App() {
         <input value={toDo} onChange={onChange} type='text' placeholder='Write your to do'></input>
 
         <button>Add To do</button>
+        <hr />
+        {toDoArray.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
       </form>
     </div>
   )
