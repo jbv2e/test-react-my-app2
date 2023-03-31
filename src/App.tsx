@@ -1,37 +1,45 @@
-import { useEffect, useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 // import './App.css'
 import Button from './Button'
 // import './style.css'
 import styles from './App.module.css'
+// import Home from 'routes/Home'
+// import { Home } from 'routes*'
+import Home from 'routes/Home'
+import Details from 'routes/Details'
+// import Movie from 'component/Movie'
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+} from 'react-router-dom'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home></Home>,
+  },
+  {
+    path: '/details/:id',
+    element: <Details></Details>,
+  },
+])
 
 function App() {
-  const [toDo, setToDo] = useState<string>('')
-  const [toDoArray, setToDoArray] = useState<string[]>([])
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setToDo(e.target.value)
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (toDo === '') return
-    setToDoArray((cur) => [toDo, ...cur])
-    setToDo('')
-    //console.log(toDoArray)
-  }
-  return (
-    <div>
-      <h1>Todo ({toDoArray.length})</h1>
-      <form onSubmit={onSubmit}>
-        <input value={toDo} onChange={onChange} type='text' placeholder='Write your to do'></input>
-
-        <button>Add To do</button>
-        <hr />
-        {toDoArray.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </form>
-    </div>
-  )
+  return <RouterProvider router={router}></RouterProvider>
 }
+
+/*
+      // <Router>
+    //   <Routes>
+    //     <Route path='/' element={<Home />}></Route>
+    //   </Routes>
+    // </Router>
+                */
 
 export default App
